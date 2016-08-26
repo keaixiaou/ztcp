@@ -3,6 +3,7 @@
 
 namespace ZPHP\Socket\Callback;
 
+use ZPHP\Core\Config;
 use ZPHP\Socket\ICallback;
 use ZPHP\Core\Config as ZConfig;
 use ZPHP\Core;
@@ -96,6 +97,11 @@ abstract class Swoole implements ICallback
         }
 
         Protocol\Request::setSocket($server);
+
+        $common = Config::get('common_file');
+        if(!empty($common)){
+            require ROOTPATH.$common;
+        }
     }
 
     public function onWorkerStop($server, $workerId)

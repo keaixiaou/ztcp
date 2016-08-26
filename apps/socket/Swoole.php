@@ -2,6 +2,7 @@
 
 namespace socket;
 
+use ZPHP\Core\Config;
 use ZPHP\Protocol\Request;
 use ZPHP\Socket\Callback\Swoole as ZSwoole;
 use ZPHP\Socket\IClient;
@@ -28,19 +29,22 @@ class Swoole extends ZSwoole
             echo $_data;
             $result = $_data;
             if($result) {
-                $serv->send($fd, $result);
+//                Request::getSocket()->send($fd,$result);
+                Zsend($serv,$fd, $result);
             }
         }
     }
 
     public function onClose()
     {
-        Request::setFd(func_get_arg(1));
-        Request::parse([
-            'a'=>'chat',
-            'm'=>'offline'
-        ]);
-        ZRoute::route();
+//        Request::setFd(func_get_arg(1));
+//        Request::parse([
+//            'a'=>'chat',
+//            'm'=>'offline'
+//        ]);
+//        ZRoute::route();
+        echo 'fd:'.func_get_arg(1).';close'."\n";
+        var_dump(Config::get('connection'));
     }
 
 }

@@ -1,5 +1,5 @@
 <?php
-define('CHAT_MSG_EOF','|#EOF#|');
+define('CHAT_MSG_EOF','#|EOF|#');
 
 use \ZPHP\Socket\Adapter\Swoole;
 
@@ -8,9 +8,11 @@ return array(
     'project_name' => 'zphp',
     'app_path' => 'apps',
     'ctrl_path' => 'ctrl',
+    'common_file'  => '/library/function.php',
     'socket' => array(
         'host' => '0.0.0.0',                          //socket 监听ip
         'port' => 8991,                             //socket 监听端口
+        'log_file' => ROOTPATH.'/log/system/swoole.log',
         'adapter' => 'Swoole',                          //socket 驱动模块
         'server_type' => Swoole::TYPE_TCP,              //socket 业务模型 tcp/udp/http/websocket
         'daemonize' => 1,                             //是否开启守护进程
@@ -30,6 +32,7 @@ return array(
     ),
 
     'project'=>array(
+        'log_path' => 'socket',
         'name'=>'zphp',                 //项目名称。(会做为前缀，隔离不同的项目)
         'view_mode'=>'String',   		//view模式
         'ctrl_name'=>'a',				//ctrl参数名
