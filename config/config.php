@@ -1,5 +1,5 @@
 <?php
-define('CHAT_MSG_EOF','##||##');
+define('CHAT_MSG_EOF','|#EOF#|');
 
 use \ZPHP\Socket\Adapter\Swoole;
 
