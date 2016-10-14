@@ -45,10 +45,6 @@ abstract class Swoole implements ICallback
             if (is_file($filename)) {
                 unlink($filename);
             }
-            $filename = $pidPath . DS . ZConfig::get('project_name') . '_manager.pid';
-            if (is_file($filename)) {
-                unlink($filename);
-            }
         }
     }
 
@@ -61,10 +57,6 @@ abstract class Swoole implements ICallback
     {
         swoole_set_process_name(ZConfig::get('project_name') .
             ' server manager:' . $server->manager_pid);
-//        $pidPath = ZConfig::getField('project', 'pid_path');
-//        if (!empty($pidPath)) {
-//            file_put_contents($pidPath . DS . ZConfig::get('project_name') . '_manager.pid', $server->manager_pid);
-//        }
     }
 
     /**
@@ -74,13 +66,6 @@ abstract class Swoole implements ICallback
      */
     public function onManagerStop($server)
     {
-        $pidPath = ZConfig::getField('project', 'pid_path');
-        if (!empty($pidPath)) {
-            $filename = $pidPath . DS . ZConfig::get('project_name') . '_manager.pid';
-            if (is_file($filename)) {
-                unlink($filename);
-            }
-        }
     }
 
     public function onWorkerStart($server, $workerId)
